@@ -9,10 +9,11 @@ use super::ArrayStore;
 use alloc::boxed::Box;
 #[cfg(not(feature = "std"))]
 use alloc::vec::Vec;
+use rkyv::{Archive, Deserialize, Serialize};
 
 pub const BITMAP_LENGTH: usize = 1024;
 
-#[derive(Clone, Eq, PartialEq)]
+#[derive(Clone, Eq, PartialEq, Archive, Serialize, Deserialize)]
 pub struct BitmapStore {
     len: u64,
     bits: Box<[u64; BITMAP_LENGTH]>,

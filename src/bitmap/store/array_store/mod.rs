@@ -13,10 +13,11 @@ use alloc::vec::Vec;
 
 #[cfg(not(feature = "std"))]
 use alloc::boxed::Box;
+use rkyv::{Archive, Deserialize, Serialize};
 
 use super::bitmap_store::{bit, key, BitmapStore, BITMAP_LENGTH};
 
-#[derive(Clone, Eq, PartialEq)]
+#[derive(Clone, Eq, PartialEq, Archive, Serialize, Deserialize)]
 pub struct ArrayStore {
     vec: Vec<u16>,
 }

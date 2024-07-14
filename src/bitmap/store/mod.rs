@@ -7,6 +7,7 @@ use core::ops::{
     BitAnd, BitAndAssign, BitOr, BitOrAssign, BitXor, BitXorAssign, RangeInclusive, Sub, SubAssign,
 };
 use core::slice;
+use rkyv::{Archive, Deserialize, Serialize};
 
 pub use self::bitmap_store::BITMAP_LENGTH;
 use self::Store::{Array, Bitmap};
@@ -19,7 +20,7 @@ use crate::bitmap::container::ARRAY_LIMIT;
 #[cfg(not(feature = "std"))]
 use alloc::boxed::Box;
 
-#[derive(Clone)]
+#[derive(Clone, Archive, Serialize, Deserialize)]
 pub enum Store {
     Array(ArrayStore),
     Bitmap(BitmapStore),

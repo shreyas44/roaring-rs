@@ -10,8 +10,9 @@ pub const ARRAY_LIMIT: u64 = 4096;
 
 #[cfg(not(feature = "std"))]
 use alloc::vec::Vec;
+use rkyv::{Archive, Deserialize, Serialize};
 
-#[derive(PartialEq, Clone)]
+#[derive(PartialEq, Clone, Archive, Serialize, Deserialize)]
 pub struct Container {
     pub key: u16,
     pub store: Store,

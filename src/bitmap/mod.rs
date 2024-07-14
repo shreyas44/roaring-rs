@@ -25,6 +25,9 @@ pub use self::iter::Iter;
 
 #[cfg(not(feature = "std"))]
 use alloc::vec::Vec;
+use rkyv::Archive;
+use rkyv::Deserialize;
+use rkyv::Serialize;
 
 /// A compressed bitmap using the [Roaring bitmap compression scheme](https://roaringbitmap.org/).
 ///
@@ -42,7 +45,7 @@ use alloc::vec::Vec;
 /// rb.insert(7);
 /// println!("total bits set to true: {}", rb.len());
 /// ```
-#[derive(PartialEq)]
+#[derive(PartialEq, Archive, Serialize, Deserialize)]
 pub struct RoaringBitmap {
     containers: Vec<container::Container>,
 }
